@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Access-Control-Allow-Origin" content="*">
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			.bg {
+				background: #00BB00
+			}
+			.logo {
+				margin: 30% 0 0 0;
+			}
+			.logo-text {
+				text-align: center;
+				font-size: 70px;
+				color: #921AFF
+			}
+			.login-div {
+				margin: 0 0 0 0;
+				text-align: center
+			}
+			.input {
+				width: 76%;
+				height: 35px;
+				border-radius: 10px;
+			}
+			.inputCC {
+				margin: 0 0 0 10px;
+				width: 48%;
+				height: 35px;
+				border-radius: 10px;
+				float: middle
+			}
+			.inputSCC {
+				margin: 0 0 0 10px;
+				width: 26%;
+				height: 41px;
+				border-radius: 10px;
+				float: middle
+			}
+			.input-btn {
+				margin: 0 37;
+				width: 35%;
+				height: 35px;
+				float: middle
+			}
+		</style>
+		<script type="text/javascript" src="script/jquery-1.4.1.js"></script>
+	</head>
+	<body class='bg'>
+		<div class='logo'>
+			<p class='logo-text'>
+				注 册
+			<p>
+		</div>
+		<div class='login-div'>
+			<form class='login-form'>
+				<div>
+					<input id="MobileNumber" type="text" class='input' placeholder="输入手机号">
+				</div>
+				<br>
+				<div>
+					<input id="CheckCode" type="text" class='inputCC' placeholder="验证码">
+					<input id="SendCheckCode" type='submit' class='inputSCC'  onclick="SendCheckCode" value="发送验证码">
+				</div>
+				<br>
+				<div>
+					<input id="pwd" type="text" class='input' placeholder="设置密码">
+				</div>
+				<br>
+				<div>
+					<input id="pwdConfirm" type="text" class='input' placeholder="重新输入密码">
+				</div>
+				<br>
+			</form>
+			<div>
+				<input type='submit' class='input-btn' onclick='Register()' value="注册">
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="script/api.js"></script>
+	<script>
+		function Register() {
+			var username = $api.val($api.byId('MobileNumber'));
+			var pwd = $api.val($api.byId('pwd'));
+			api.ajax({
+				url : 'http://119.29.55.113:5000/registerone',
+				method : 'post',
+				timeout : 30,
+				dataType : 'text',
+				returnAll : false,
+				data : {
+					values : {
+						user_name : username,
+						passwd : pwd
+					},
+				}
+			}, function(ret, err) {
+				if (ret) {
+				
+					if (ret == "0") {
+						api.alert({
+							msg : '注册失败！'
+						});
+					} else if (ret== "2") {
+						
+						api.alert({
+							msg : '已经注册！'
+						});
+					} else if (ret == "1") {
+						window.location.href = 'PersonalInfo.html?username=' + username;
+					}
+				} 
+			});
+		}
+	</script>
+</html>

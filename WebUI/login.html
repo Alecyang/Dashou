@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+		    .bg {
+		        background: #00BB00
+		    }
+		    .logo {
+                margin: 30% 0 0 0 ;
+                
+		    }
+		    .logo-text {
+		        text-align: center;
+		        font-size: 70px;
+		        color: #921AFF 
+		    }
+		    .login-div {
+		        margin: 0 0 0 0 ;
+		        text-align: center
+		    }
+		    .input {
+		        width: 76%;
+		        height: 35px;
+		        border-radius: 10px;
+		    }
+		    .input-btn {
+		        margin: 0 0 0 34px;
+		        width: 35%;
+		        height: 35px;
+		        float: left
+		    }
+		</style>
+		<script type="text/javascript" src="script/jquery-1.4.1.js"></script>
+	</head>
+	<body class='bg'>
+	    <div class='logo'>
+	        <p class='logo-text'>答 手<p>
+	    </div>
+		<div class='login-div'>
+		   <form class='login-form'>
+		      <div>
+		         <input id="username" type="text" class='input' placeholder="用户名">
+		      </div>
+		      <br>
+		      <div>
+		         <input id="pwd" type="text" class='input' placeholder="密码">
+		      </div>
+		      <br>
+		   </form>
+		  <div>
+	          <input type='submit' class='input-btn' onclick='check_login()' value="登录">
+	      </div>
+	      <div>
+	          <input type='submit' class='input-btn' value="注册" onclick="Register()">
+	      </div>
+		</div>
+	</body>
+    <script type="text/javascript" src="script/api.js"></script>	
+	<script>
+	function Register(){
+	
+		window.location.href='Register.html';
+	}
+	     function check_login() {
+	      	        var username = $api.val($api.byId('username'));
+               	        var pwd = $api.val($api.byId('pwd'
+						));
+
+						api.ajax({
+							url : 'http://119.29.55.113:5000/logincheck',
+							method : 'post',
+							timeout : 30,
+							dataType : 'text',
+							returnAll : false,
+							data : {
+								values : {
+									username : username,
+									passwd : pwd
+								},
+							}
+						}, function(ret, err) {
+							if (ret) {
+								var urlJson = JSON.stringify(ret);
+								api.alert({
+									msg : urlJson
+								});
+							} else {
+								api.alert({
+									msg : ('错误码：' + err.code + '；错误信息：' + err.msg + '网络状态码：' + err.statusCode)
+								});
+							};
+						});
+
+						}
+
+	</script>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>去问答</title>
+    <style>
+        body { background: #00BB00}
+        
+        div {
+            text-align: center
+        }
+        .frame1-camera { 
+            margin:35% 0 0 0;
+            width: 60%;
+        }
+        .frame1-text {
+            margin: 5% 0 0 0;
+            font-size: 180%;
+            font-family: Tahoma;
+            color: #6F00D2;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img class="frame1-camera " src="../res/frame1-camera.png" onclick="getPhoto()">
+    </div>
+    <div>
+        <p class="frame1-text ">拍题上传</p>
+    </div>
+    
+</body>
+
+<script>
+	function getPhoto(){
+	    api.getPicture({
+		    sourceType: 'camera',
+		    encodingType: 'jpg',
+		    mediaValue: 'pic',
+		    destinationType: 'url',
+		    allowEdit: true,
+		    quality: 100,
+		    saveToPhotoAlbum: false
+		}, function(ret, err){ 
+		    if (ret) {
+//		        api.alert({msg: ret.data});
+				api.openWin({
+				    name: 'get-question-pic',
+				    url: 'get-question-pic.html',
+				    animation: {
+				        subType: "none"
+				    },
+				    pageParam: {"picPath": ret.data}
+				});
+			}
+		});   
+       api.openFrameGroup({
+            name: 'qa-group',
+            background: "#1E1E23",
+            scrollEnabled: true,
+            rect: {
+                x: 0,
+                y: 100,
+                w: 'auto',
+                h: 200
+            },
+            index: 0,
+            frames:[
+                {
+                    name: 'question', 
+                    url: './qa/question.html', 
+                    pageParam:{}, 
+                    bounces:true, 
+                    opaque:true,
+                    bgColor: "#1E1E23"
+                },{
+                    name: 'answer', 
+                    url: './qa/answer.html', 
+                    pageParam:{}, 
+                    bounces:true, 
+                    opaque:true,
+                    bgColor: "#1E1E23"
+                }
+            ]
+        }, function(ret, err){
+        });
+    }
+    
+</script>
+
+
+</html>

@@ -1,0 +1,73 @@
+html,body{height: 100%}
+#wrap{
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-flex-flow: column;
+           flex-flow: column;
+}
+.btn{
+    background-color: #fff; cursor: pointer; display: inline-block; font-size: 14px;
+    border: 1px solid #ccc; border-radius: 4px; padding: .5em 1.4em;
+    text-decoration: none;
+    text-align: center; vertical-align: middle;
+    -webkit-user-select: none;
+    user-select: none;
+    margin-right: 10px; margin-top: 10px; 
+}
+input[type="text"], textarea{
+    border: 1px solid #ccc; border-radius: 4px; padding: .2em .4em; vertical-align: middle;
+    box-shadow: inset 2px -2px 4px #ccc;
+    display: inline-block; width: 98%;
+}
+p{
+    margin-bottom: 1em;
+}
+#header{
+    text-align: center; background-color: #81a9c3; color: #fff;
+    width: 100%; position: relative;
+}
+#header h1{
+    font-size: 20px; height: 44px; line-height: 44px; margin: 0em; color: #fff;
+}
+#header .btn{
+    position: absolute; right: 1em; bottom: 5px; margin-top: 5px;
+}
+#header .back{
+    left: 1em; right: auto;
+}
+
+#main{
+    -webkit-box-flex: 1; 
+    -webkit-flex: 1;
+    flex: 1;
+    padding: 2em;
+}
+#main h1{
+    font-size: 20px; margin-bottom: 20px;
+}
+#main .content{
+    padding: 1em; border: 1px solid #ccc;
+}
+#list li{
+    line-height: 2em; height: 2em;
+    border-bottom: 1px dashed #ccc;
+}
+#list li a{
+    display: block; 
+}
+#list li a.active{
+    background-color: #eee;
+}
+#footer{
+    height: 30px; line-height: 30px;
+    background-color: rgb(93,199,73); 
+    width: 100%;
+    text-align: center;
+}
+#footer h5{
+    color: white;
+}
+.con{font-size: 28px; text-align: center;}

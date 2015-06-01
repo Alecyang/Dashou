@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Access-Control-Allow-Origin" content="*">
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			.bg {
+				background: #00BB00
+			}
+			.logo {
+				margin: 30% 0 0 0;
+			}
+			.logo-text {
+				text-align: center;
+				font-size: 70px;
+				color: #921AFF
+			}
+			.login-div {
+				margin: 0 0 0 0;
+				text-align: center
+			}
+			.input {
+				width: 56%;
+				height: 35px;
+				border-radius: 10px;
+			}
+			.lb {
+				float: middle;
+				margin-right: 20px;
+			}
+			.input-btn {
+				margin: 0 37;
+				width: 35%;
+				height: 35px;
+				float: middle
+			}
+		</style>
+		<script type="text/javascript" src="script/jquery-1.4.1.js"></script>
+		<script>
+			function getQueryString(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var r = window.location.search.substr(1).match(reg);
+				if (r != null)
+					return unescape(r[2]);
+				return null;
+			}
+
+			function Confirm() {
+				if (true) {
+					api.ajax({
+						url : 'http://119.29.55.113:5000/registertwo',
+						method : 'post',
+						timeout : 30,
+						dataType : 'text',
+						returnAll : false,
+						data : {
+							values : {
+								user_name : GetQueryString("username"),
+								nickname : $api.val($api.byId('NickName')),
+								gender : '男',
+								school : $api.val($api.byId('School')),
+								grade : $api.val($api.byId('Class'))
+							},
+						}
+					}, function(ret, err) {
+						if (ret) {
+							if (ret == "0")
+								api.alert({
+									msg : '失败！'
+								});
+							if (ret == "1")
+								api.alert({
+									msg : '成功！'
+								});
+						}
+					});
+				}
+			}
+		</script>
+	</head>
+	<body class='bg'>
+		<div class='logo'>
+			<p class='logo-text'>
+				个人信息
+			<p>
+		</div>
+		<div class='login-div'>
+			<form class='login-form'>
+				<div>
+					<font class="lb" >昵称</font>
+					<input id="NickName" type="text" class='input' placeholder="昵称">
+				</div>
+				<br>
+				<div>
+					<font style=" float: left; margin-left: 80px" >性别</font>
+					<label>男
+						<input id="Boy" type="radio" name="gender" value="1"  />
+					</label>
+					<label>女
+						<input id="Girl" type="radio" name="gender" value="0" />
+					</label>
+				</div>
+				<br>
+				<div>
+					<font class="lb" >学校</font>
+					<input id="School" type="text" class='input' placeholder="学校">
+				</div>
+				<br>
+				<div>
+					<font class="lb" >年级</font>
+					<input id="Class" type="text" class='input' placeholder="年级">
+				</div>
+				<br>
+			</form>
+			<div>
+				<input type='submit' class='input-btn' onclick="Confirm()" value="确定">
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="script/api.js"></script>
+</html>
